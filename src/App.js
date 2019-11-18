@@ -76,12 +76,12 @@ function App() {
         tempInput = tempInput.split('-').join('');
       }
       try {
+        // const ans = `${eval(tempInput)}`.substring(0, 10);
         // eslint-disable-next-line no-eval
         const ans = eval(tempInput);
         setInput(`${ans}`);
       } catch (e) {
         setError(true);
-        console.log('Error');
       }
       setOutput(tempInput);
     } else if (input === '0') {
@@ -104,7 +104,7 @@ function App() {
 
         if (temp.replace(/[^.]/g, '').length > 1 && button === '.') {
         } else {
-          if (input.length >= 9) {
+          if (input.length >= 10) {
             temp = input.substring(1, input.length);
             setInput(`${temp}${button}`);
           } else {
@@ -113,8 +113,7 @@ function App() {
         }
       } else if (input.replace(/[^.]/g, '').length > 0 && button === '.') {
       } else {
-        console.log(input.length);
-        if (input.length >= 9) {
+        if (input.length >= 10) {
           temp = input.substring(1, input.length);
           setInput(`${temp}${button}`);
         } else {
