@@ -124,6 +124,7 @@ function App() {
   };
   return (
     <div className='calc'>
+      <a href="https://github.com/Confidence-Okoghenun/Front-End-Libraries-Projects---Build-a-JavaScript-Calculator">GitHub</a>
       <Display input={input} output={output} error={error} />
       <div className='button-container'>
         <div className='top-container'>
