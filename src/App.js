@@ -28,15 +28,21 @@ const digits = [
 function App() {
   const [input, setInput] = useState('');
   const [output, setOutput] = useState(0);
-  const [error, setError] = useState(true)
+  const [error, setError] = useState(false);
   let temp;
 
   const handleOnClick = e => {
     const button = e.target.childNodes[0].data;
+    if (error) {
+      setInput('');
+      setOutput(0);
+      setError(false);
+    }
 
     if (button === 'AC') {
       setInput('');
       setOutput(0);
+      setError(false);
     } else if (button === '=') {
       let tempInput = input;
       if (tempInput.includes('-*')) {
@@ -69,13 +75,13 @@ function App() {
       if (tempInput.includes('-+')) {
         tempInput = tempInput.split('-').join('');
       }
-      // console.log(input, tempInput);
-      // eslint-disable-next-line no-eval
-      if(eval(tempInput)) {
+      try {
+        // eslint-disable-next-line no-eval
         const ans = eval(tempInput);
         setInput(`${ans}`);
-      } else {
-        setError(true)
+      } catch (e) {
+        setError(true);
+        console.log('Error');
       }
       setOutput(tempInput);
     } else if (input === '0') {
@@ -98,7 +104,7 @@ function App() {
 
         if (temp.replace(/[^.]/g, '').length > 1 && button === '.') {
         } else {
-          if(input.length >= 9) {
+          if (input.length >= 9) {
             temp = input.substring(1, input.length);
             setInput(`${temp}${button}`);
           } else {
@@ -107,8 +113,8 @@ function App() {
         }
       } else if (input.replace(/[^.]/g, '').length > 0 && button === '.') {
       } else {
-        console.log(input.length)
-        if(input.length >= 9) {
+        console.log(input.length);
+        if (input.length >= 9) {
           temp = input.substring(1, input.length);
           setInput(`${temp}${button}`);
         } else {
@@ -119,7 +125,7 @@ function App() {
   };
   return (
     <div className='calc'>
-      <Display input={input} output={output} />
+      <Display input={input} output={output} error={error} />
       <div className='button-container'>
         <div className='top-container'>
           <LeftParen onClick={handleOnClick} />
