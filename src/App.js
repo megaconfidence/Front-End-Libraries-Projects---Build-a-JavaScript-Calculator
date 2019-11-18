@@ -76,10 +76,9 @@ function App() {
         tempInput = tempInput.split('-').join('');
       }
       try {
-        // const ans = `${eval(tempInput)}`.substring(0, 10);
         // eslint-disable-next-line no-eval
-        const ans = eval(tempInput);
-        setInput(`${ans}`);
+        const ans = `${eval(tempInput)}`.substring(0, 10);
+        setInput(ans);
       } catch (e) {
         setError(true);
       }
